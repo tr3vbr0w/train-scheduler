@@ -11,27 +11,26 @@ var firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   var database = firebase.database()
-  
+//On s
 $('#submit').click(function(e) {
     e.preventDefault()
-    let dateVal = $('#start-date').val()
-    let monthlyRate = $('#monthly-rate').val()
-    let employeeName = $('#employee-name').val()
-    let roleVal = $('#role').val()
-    let monthsWorked = $('#months-worked').val()
+    let firstTVal = $('#first-train').val()
+    let freqVal = $('#freq').val()
+    let nameVal = $('#first-train').val()
+    let destVal = $('#t-dest').val()
     database.ref().push({
-        employeeName: employeeName,
-        monthlyRate: monthlyRate,
-        roleVal: roleVal,
-        dateVal: dateVal,
+        nameVal: nameVal,
+        firstTVal: firstTVal,
+        destVal: destVal,
+        freqVal: freqVal,
     })
-    dateVal = $('#start-date').val('')
-    monthlyRate = $('#monthly-rate').val('')
-    employeeName = $('#employee-name').val('')
-    roleVal = $('#role').val('')
+    freqVal = $('#freq').val('')
+    firstTVal = $('#first-train').val('')
+    nameVal = $('#train-name').val('')
+    destVal = $('#t-dest').val('')
     monthsWorked = $('#months-worked').val('')
 })
-//Each time a new
+//Each time a new train value is added to the database, 
 // database.ref().on("child_added", function(snapshot) {
 //     // let totalBilled = monthlyRateVal * monthsWorked;
 //     // let currentdate = new Date(year, month, day);
@@ -43,11 +42,11 @@ $('#submit').click(function(e) {
 //     var monthsWorkedTd = $('<td>')
 //     var monthlyRateTd = $('<td>')
 //         // var totalBilledTd = $('<td>')
-//     nameTd.text(snapshot.val().employeeName);
-//     roleTd.text(snapshot.val().roleVal);
-//     startDateTd.text(snapshot.val().dateVal);
+//     nameTd.text(snapshot.val().nameVal);
+//     roleTd.text(snapshot.val().destVal);
+//     startDateTd.text(snapshot.val().freqVal);
 //     monthsWorkedTd.text(snapshot.val().monthsWorked);
-//     monthlyRateTd.text(snapshot.val().monthlyRate);
+//     monthlyRateTd.text(snapshot.val().firstTVal);
 //     // totallBilledTd.text(snapshot.val().totalBilled);
 //     $(r).append(nameTd, roleTd, startDateTd, monthsWorkedTd, monthlyRateTd)
 //     $('tbody').append(r)

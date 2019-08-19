@@ -10,19 +10,17 @@ var firebaseConfig = {
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  var database = firebase.database()
+  var database = firebase.database();
 
-//Moment function designed to take the first train time, convert it to moment, 
-// find the difference between the first time and now, find the remainder, 
-// find the minutes until next train and next train time
+
 //On submit button click, take the value from each form field id, 
 //assign it to a corresponding variable within the database
 $('#submit').click(function(e) {
-    e.preventDefault()
-    let firstTVal = $('#first-train').val()
-    let freqVal = $('#freq').val()
-    let nameVal = $('#train-name').val()
-    let destVal = $('#t-dest').val()
+    e.preventDefault();
+    let firstTVal = $('#first-train').val();
+    let freqVal = $('#freq').val();
+    let nameVal = $('#train-name').val();
+    let destVal = $('#t-dest').val();
     database.ref().push({
         nameVal: nameVal,
         firstTVal: firstTVal,
@@ -32,44 +30,41 @@ $('#submit').click(function(e) {
 
     
     //Once submit button is clicked, the form fields are cleared
-    freqVal = $('#freq').val('')
-    firstTVal = $('#first-train').val('')
-    nameVal = $('#train-name').val('')
-    destVal = $('#t-dest').val('')
+    freqVal = $('#freq').val('');
+    firstTVal = $('#first-train').val('');
+    nameVal = $('#train-name').val('');
+    destVal = $('#t-dest').val('');
     
 })
 //Each time a new train value is added to the database, create a new row with the trains information contained table data. Append each table data tag to the corresponding row, then append new row to the table
 database.ref().on("child_added", function(snapshot) {
-    console.log(snapshot.val());
     //Moment taking information from database in order to find the information required for nextTrainTime and timeUntilNextTrain 
     var firstTConverted = moment(snapshot.val().firstTVal, "HH:mm").subtract(1,"years");
-    console.log(firstTConverted); 
-    var currentTime = moment();
-    console.log('current time is'+currentTime);
+    // var currentTime = moment();
     
     var diffTime = moment().diff(moment(firstTConverted), "minutes");
-    console.log('difference in time is'+diffTime);
-    console.log('this is the snapshot for freqVal: '+ snapshot.val().freqVal)
     var tRemainder = diffTime % snapshot.val().freqVal;
-    console.log('this is the remainder '+tRemainder);
 
     var tMinutesTillTrain = snapshot.val().freqVal - tRemainder;
-    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
 
-    var nextTrain = moment().add(tMinutesTillTrain) - tRemainder;
-    console.log('Arrival time: ' + moment(nextTrain).format('hh:mm'))
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+    console.log(moment(nextTrain).format('hh:mm'));
+
+    var r = $('<tr>');
+    var firstTVal = $('<td>');
+    var freqVal= $('<td>');
+    var nameVal = $('<td>');
+    var destVal = $('<td>');
+    var nxtTrainTime = $('<td>');
+    var arrivalTime =$('<td>');
 
 
-    var r = $('<tr>')
-    var firstTVal = $('<td>')
-    var freqVal= $('<td>')
-    var nameVal = $('<td>')
-    var destVal = $('<td>')
-    
     firstTVal.text(snapshot.val().firstTVal);
     destVal.text(snapshot.val().destVal);
     nameVal.text(snapshot.val().nameVal);
     freqVal.text(snapshot.val().freqVal);
-    $(r).append(nameVal, destVal, firstTVal, freqVal)
-    $('tbody').append(r)
+    nxtTrainTime.text(tMinutesTillTrain);
+    arrivalTime.text(moment(nextTrain).format('hh:mm'));
+    $(r).append(nameVal, destVal, firstTVal, freqVal, nxtTrainTime, arrivalTime);
+    $('tbody').append(r);
 })

@@ -11,12 +11,12 @@ var firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   var database = firebase.database()
-//On s
+//On submit button click, take the value from each form field id, assign it to a corresponding variable within the database
 $('#submit').click(function(e) {
     e.preventDefault()
     let firstTVal = $('#first-train').val()
     let freqVal = $('#freq').val()
-    let nameVal = $('#first-train').val()
+    let nameVal = $('#train-name').val()
     let destVal = $('#t-dest').val()
     database.ref().push({
         nameVal: nameVal,
@@ -24,30 +24,25 @@ $('#submit').click(function(e) {
         destVal: destVal,
         freqVal: freqVal,
     })
+    //Once submit button is clicked, the form fields are cleared
     freqVal = $('#freq').val('')
     firstTVal = $('#first-train').val('')
     nameVal = $('#train-name').val('')
     destVal = $('#t-dest').val('')
-    monthsWorked = $('#months-worked').val('')
+
 })
-//Each time a new train value is added to the database, 
-// database.ref().on("child_added", function(snapshot) {
-//     // let totalBilled = monthlyRateVal * monthsWorked;
-//     // let currentdate = new Date(year, month, day);
-//     console.log(snapshot.val());
-//     var r = $('<tr>')
-//     var nameTd = $('<td>')
-//     var roleTd = $('<td>')
-//     var startDateTd = $('<td>')
-//     var monthsWorkedTd = $('<td>')
-//     var monthlyRateTd = $('<td>')
-//         // var totalBilledTd = $('<td>')
-//     nameTd.text(snapshot.val().nameVal);
-//     roleTd.text(snapshot.val().destVal);
-//     startDateTd.text(snapshot.val().freqVal);
-//     monthsWorkedTd.text(snapshot.val().monthsWorked);
-//     monthlyRateTd.text(snapshot.val().firstTVal);
-//     // totallBilledTd.text(snapshot.val().totalBilled);
-//     $(r).append(nameTd, roleTd, startDateTd, monthsWorkedTd, monthlyRateTd)
-//     $('tbody').append(r)
-// })
+//Each time a new train value is added to the database, create a new row with the trains information contained table data. Append each table data tag to the corresponding row, then 
+database.ref().on("child_added", function(snapshot) {
+    console.log(snapshot.val());
+    var r = $('<tr>')
+    var firstTVal = $('<td>')
+    var freqVal= $('<td>')
+    var nameVal = $('<td>')
+    var destVal = $('<td>')
+    firstTVal.text(snapshot.val().firstTVal);
+    destVal.text(snapshot.val().destVal);
+    nameVal.text(snapshot.val().nameVal);
+    freqVal.text(snapshot.val().freqVal);
+    $(r).append(nameVal, destVal, firstTVal, freqVal)
+    $('tbody').append(r)
+})

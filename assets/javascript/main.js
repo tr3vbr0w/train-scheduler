@@ -64,4 +64,10 @@ database.ref().on("child_added", function(snapshot) {
     arrivalTime.text(moment(nextTrain).format('hh:mm'));
     $(r).append(nameVal, destVal, firstTVal, freqVal, nxtTrainTime, arrivalTime);
     $('tbody').append(r);
+//If the train is arriving soon, the number will flash in an out
+    if (tMinutesTillTrain < 5) {
+        $(nxtTrainTime).css('background-color', 'orange');
+        console.log(tMinutesTillTrain);
+        // $(nxtTrainTime).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
+    }
 })

@@ -1,20 +1,23 @@
 <!doctype html>
 <html lang="en">
 ​
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-​
+    ​
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- My Stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css">
     <title>Train Scheduler</title>
 </head>
 ​
+
 <body>
-    <div class="container">
+    <div class="container rounded">
         <div class="jumbotron">
             <h1 class="display-4 text-secondary">Train Scheduler</h1>
             <p class="lead display-12 text-secondary">Today's Train Schedule</p>
@@ -26,7 +29,7 @@
                         <th scope="col">Train Name</th>
                         <th scope="col">Destination</th>
                         <th scope="col">First Train Time</th>
-                        <th scope="col">Frequency</th>
+                        <th scope="col">Frequency (min)</th>
                         <th scope="col">Minutes Until Next Train</th>
                         <th scope="col">Next Arrival Time</th>
 
@@ -35,36 +38,47 @@
                 <tbody>
                 </tbody>
             </table>
+            <div class="row">
+                <form class="col-6">
+                    <div class="form-group rounded">
+                        <label for="Train Name">Train Name</label>
+                        <input type="text" class="form-control" id="train-name" aria-describedby="Employee Name"
+                            placeholder="Train Name">
+                    </div>
+                    <div class="form-group rounded">
+                        <label for="Train Destination">Train Destination</label>
+                        <input type="text" class="form-control" id="t-dest" placeholder="Destination">
+                    </div>
+                    <div class="form-group rounded">
+                        <label for="First Train">First Train</label>
+                        <input type="time" class="form-control" id="first-train" aria-describedby="First Time"
+                            placeholder="First Train">
+                    </div>
+                    <div class="form-group rounded">
+                        <label for="Frequency">Frequency (min)</label>
+                        <input type="number" class="form-control" id="freq" placeholder="Frequency">
+                    </div>
+                    ​
+                    <button type="submit" class="btn btn-primary mb-1" id="submit">Submit</button>
+                </form>
+                <img src="assets/images/Bedwyn train .jpg" class="col-6 mb-1" alt="">
+            </div>
         </div>
     </div>
     <div class="container">
-        <form>
-            <div class="form-group">
-                <label for="Train Name">Train Name</label>
-                <input type="text" class="form-control" id="train-name" aria-describedby="Employee Name" placeholder="Train Name">
-            </div>
-            <div class="form-group">
-                <label for="Train Destination">Train Destination</label>
-                <input type="text" class="form-control" id="t-dest" placeholder="Destination">
-            </div>
-            <div class="form-group">
-                <label for="First Train">First Train</label>
-                <input type="time" class="form-control" id="first-train" aria-describedby="First Time" placeholder="First Train">
-            </div>
-            <div class="form-group">
-                <label for="Frequency">Frequency</label>
-                <input type="number" class="form-control" id="freq" placeholder="Frequency">
-            </div>
-​
-            <button type="submit" class="btn btn-primary mb-1" id="submit">Submit</button>
-        </form>
     </div>
-​
+    ​
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
     <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.4.0/firebase-database.js"></script>
     <!-- For some reason moment is returing an function as undefined? -->
@@ -73,4 +87,5 @@
 </body>
 ​
 ​
+
 </html>

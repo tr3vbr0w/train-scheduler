@@ -1,0 +1,10 @@
+.jumbotron {
+    background-image: url(../images/njtransit_banner18.jpg);
+    background-size: cover;
+}
+body {
+    background-color: grey;
+} 
+.container {
+    background-color: aliceblue;
+}

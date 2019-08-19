@@ -8,7 +8,7 @@ var firebaseConfig = {
     messagingSenderId: "47581232379",
     appId: "1:47581232379:web:547a7408795f79b6"
   };
-  // Initialize Firebase
+// Initialize Firebase
   firebase.initializeApp(firebaseConfig);
   var database = firebase.database();
 
@@ -29,7 +29,7 @@ $('#submit').click(function(e) {
     })
 
     
-    //Once submit button is clicked, the form fields are cleared
+//Once submit button is clicked, the form fields are cleared
     freqVal = $('#freq').val('');
     firstTVal = $('#first-train').val('');
     nameVal = $('#train-name').val('');
@@ -38,18 +38,15 @@ $('#submit').click(function(e) {
 })
 //Each time a new train value is added to the database, create a new row with the trains information contained table data. Append each table data tag to the corresponding row, then append new row to the table
 database.ref().on("child_added", function(snapshot) {
-    //Moment taking information from database in order to find the information required for nextTrainTime and timeUntilNextTrain 
+//Moment taking information from database in order to find the information required for nextTrainTime and timeUntilNextTrain 
     var firstTConverted = moment(snapshot.val().firstTVal, "HH:mm").subtract(1,"years");
-    // var currentTime = moment();
-    
+// var currentTime = moment();
     var diffTime = moment().diff(moment(firstTConverted), "minutes");
     var tRemainder = diffTime % snapshot.val().freqVal;
-
     var tMinutesTillTrain = snapshot.val().freqVal - tRemainder;
-
     var nextTrain = moment().add(tMinutesTillTrain, "minutes");
     console.log(moment(nextTrain).format('hh:mm'));
-
+//Create new row and table data for each item in the database
     var r = $('<tr>');
     var firstTVal = $('<td>');
     var freqVal= $('<td>');
@@ -58,7 +55,7 @@ database.ref().on("child_added", function(snapshot) {
     var nxtTrainTime = $('<td>');
     var arrivalTime =$('<td>');
 
-
+//Reach out to database and take the value of each variable, adding the text to the corresponding '<td>', append each td to the table row, and append each row to the table body
     firstTVal.text(snapshot.val().firstTVal);
     destVal.text(snapshot.val().destVal);
     nameVal.text(snapshot.val().nameVal);

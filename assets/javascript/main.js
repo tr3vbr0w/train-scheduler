@@ -61,7 +61,7 @@ database.ref().on("child_added", function(snapshot) {
     nameVal.text(snapshot.val().nameVal);
     freqVal.text(snapshot.val().freqVal);
     nxtTrainTime.text(tMinutesTillTrain);
-    arrivalTime.text(moment(nextTrain).format('hh:mm'));
+    arrivalTime.text(moment(nextTrain).format('H:HH'));
     $(r).append(nameVal, destVal, firstTVal, freqVal, nxtTrainTime, arrivalTime);
     $('tbody').append(r);
 //If the train is arriving soon, the number will turn orange

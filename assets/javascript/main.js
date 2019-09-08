@@ -13,7 +13,7 @@ var firebaseConfig = {
   var database = firebase.database();
 
 
-//On submit button click, take the value from each form field id, 
+//On submit button click, take the value from each form field id 
 //assign it to a corresponding variable within the database
 $('#submit').click(function(e) {
     e.preventDefault();

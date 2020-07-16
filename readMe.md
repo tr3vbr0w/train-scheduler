@@ -1,8 +1,8 @@
-# Firebase Assignment - Train Scheduler (Basic - Recommended)
+# Train Scheduler 
 
-* Make sure that your app suits this basic spec:
+*Administrator App to set and display the train schedule
   
-  * In the form below, administrators are be able to submit the following
+  * Administrators are be able to submit the following
     
     * Train Name
     
@@ -12,9 +12,7 @@
     
     * Frequency -- in minutes
   
-  * Code this app to calculate when the next train will arrive; this should be relative to the current time.
-  
-  * Users from many different machines must be able to view same train times.
+ This app will determine the train schedule and highlight in orange trains that are scheduled to leave within the next 5 minutes
 
 
 
